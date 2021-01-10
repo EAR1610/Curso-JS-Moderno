@@ -1,9 +1,11 @@
 /**
  * DIFERENCIAS ENTRE BREAK Y CONTINUE
+ * 
  * BREAK: va a cortar la ejecución de un For Loop
  * CONTINUE: nos permite intersectar un elemento, identificarlo y continuar la ejecución
  * Se puede decir que continue, rompe un ciclo y avanza al otro. Mientras que break rompe el ciclo y no vuelve 
  * a ejecutar el For Loop
+ * 
  */
 
  //Crear un for Lopp que al detectar el elemento 5, detenga su ejecución
