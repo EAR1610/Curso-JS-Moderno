@@ -13,3 +13,11 @@ const nuevoArreglo = carrito.forEach( producto => console.log(`${producto['nombr
 const nuevoArreglo2 = carrito.map( producto => `${producto['nombre']} - Precio: ${producto['precio']}`);
 
 console.log(nuevoArreglo2);
+
+
+
+/**
+ * DIFERENCIAS ENTRE FOR EACH Y MAP
+ * For each: imprime los resultados en cada linea
+ * .map: imprime el resultado como un array
+ */
