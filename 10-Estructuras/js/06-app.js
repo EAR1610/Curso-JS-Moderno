@@ -4,7 +4,7 @@ const puedePagar = false;
 if (usuario && puedePagar) {
     console.log('Si puedes comprar');
 }else if (!usuario && !puedePagar){
-        console.log('No puedes comprar');
+        console.log('No puedes comprar, inicia sesión');
 } else if (!usuario){
     console.log('Inicia sesión o crea una cuenta');
 } else if (!puedePagar){
