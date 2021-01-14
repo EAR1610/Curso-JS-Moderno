@@ -51,10 +51,10 @@ imagen.src = 'img/hacer2.jpg';
 const card = document.createElement('div');
 card.classList.add('card');
 
-//Asignar la imagen
+//Agregar la imagen
 card.appendChild(imagen);
 
-//Asignar info
+//Agregar info
 card.appendChild(info);
 
 //Insertar en el HTML

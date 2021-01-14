@@ -1,6 +1,6 @@
 /**
  * Important
- * Traversing de DOM, se le denomina a la forma de movernos por los elementos de JS
+ * Traversing de DOM, se le denomina a la forma de movernos por los elementos de HTML
  */
 
  const navegacion = document.querySelector('.navegacion');
