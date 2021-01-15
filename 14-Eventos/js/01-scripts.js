@@ -6,3 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 console.log(3);
+
+/**
+ * Esto retorna 
+ * 1
+ * 3
+ * 2
+ */
