@@ -81,6 +81,7 @@ function ValidarFormulario(e) {
 //Funcion que resetea el formulario
 function ResetearFormulario(e) {
     formulario.reset();
+    window.location.reload();
     e.preventDefault();
 }
 
