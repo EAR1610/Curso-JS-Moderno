@@ -209,7 +209,7 @@ function NuevaCita(e) {
 
 function ReiniciarObjeto() {
     citaObj.mascota = '',
-    citaObj.prepietario = '',
+    citaObj.propietario = '',
     citaObj.telefono = '',
     citaObj.fecha = '',
     citaObj.hora = '',
