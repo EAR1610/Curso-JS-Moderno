@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clima - JavaScript Moderno</title>
+    <title>Busca el Clima</title>
 
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/tailwind.min.css" rel="stylesheet">
@@ -36,6 +36,7 @@
                         id="pais"
                     >
                         <option disabled selected value="">-- Seleccione --</option>
+                        <option value="GT">Guatemala</option>
                         <option value="AR">Argentina</option>
                         <option value="CO">Colombia</option>
                         <option value="CR">Costa Rica</option>
@@ -53,11 +54,37 @@
                 />
 
             </form>
-
-     
         </div>
     </div>
 
     <script src="js/app.js"></script>
 </body>
+<!-- Script para generar seguridad de la página-->
+<script language="Javascript">
+    document.oncontextmenu = function(){return false}
+
+    document.onkeydown = function(e) {
+            if (e.ctrlKey && 
+                (e.keyCode === 85)) {
+                return false;
+            }
+            if (e.ctrlKey && 
+                (e.keyCode === 83)) {
+                return false;
+            }
+            if (e.ctrlKey && 
+                (e.keyCode === 73)) {
+                return false;
+            }
+            if (e.ctrlKey && 
+                (e.keyCode === 74)) {
+                return false;
+            }
+
+            if(e.keyCode == 123) {
+            return false;
+        }
+    };
+</script>
+
 </html>
