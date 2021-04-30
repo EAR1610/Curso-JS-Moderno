@@ -10,3 +10,5 @@ class Persona{
 const persona = new Persona('Alexander','alex@reynoso.com');
 
 console.log(persona);
+console.log(persona.nombre);
+console.log(persona.email);

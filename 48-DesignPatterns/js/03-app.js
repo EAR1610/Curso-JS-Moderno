@@ -4,7 +4,7 @@ let instancia = null;
 
 class Persona{
     constructor(nombre, email){
-        if (!instancia) {
+        if (!instancia) {   //Si instancia es true
             this.nombre = nombre;
             this.email = email;
             instancia = this;
@@ -12,7 +12,7 @@ class Persona{
             return instancia;
         }
     }
-}
+}   
 
 const persona = new Persona('Alexander', 'correo@correo.com');
 console.log(persona);
