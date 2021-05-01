@@ -10,7 +10,7 @@ const objBusqueda = {
 
 // Promises
 const obtenerCriptomonedas = criptomonedas => new Promise( resolve => {
-    resolve(criptomonedas);
+    resolve(criptomonedas); //Extrae la información de las criptomonedas.....
 });
 
 
@@ -30,26 +30,18 @@ function consultarCriptomonedas() {
 
     fetch(url)
         .then( respuesta => respuesta.json()) // Consulta exitosa...
-        .then( resultado => obtenerCriptomonedas(resultado.Data)) // 
+        .then( resultado => obtenerCriptomonedas(resultado.Data)) // Extra la información de las criptomonedas
         .then( criptomonedas  =>  selectCriptomonedas(criptomonedas) )
         .catch( error => console.log(error));
 }
 // llena el select 
-function selectCriptomonedas(criptomonedas) {
+function selectCriptomonedas( criptomonedas ) {
 
     //Conocer el tiempo de ejecución
     const inicio = performance.now();
 
-    // criptomonedas.forEach( cripto => {
-    //     const { FullName, Name } = cripto.CoinInfo;
-    //     const option = document.createElement('option');
-    //     option.value = Name;
-    //     option.textContent = FullName;
-    //     // insertar el HTML
-    //     criptomonedasSelect.appendChild(option);
-    // });
+    for( let i = 0; i < criptomonedas.length; i+=1 ){
 
-    for(let i = 0; i < criptomonedas.length; i+=1){
         const { FullName, Name } = criptomonedas[i].CoinInfo;
         const option = document.createElement('option');
         option.value = Name;
@@ -66,7 +58,7 @@ function selectCriptomonedas(criptomonedas) {
 }
 
 
-function leerValor(e)  {
+function leerValor(e) {
     objBusqueda[e.target.name] = e.target.value;
 }
 
@@ -80,7 +72,6 @@ function submitFormulario(e) {
         mostrarAlerta('Ambos campos son obligatorios');
         return;
     }
-
 
     consultarAPI();
 }
