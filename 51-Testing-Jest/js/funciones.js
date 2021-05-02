@@ -46,7 +46,7 @@ export function nuevaCita(e) {
         return;
     }
 
-    if(editando) {
+    if( editando ) {
         // Estamos editando
         administrarCitas.editarCita( {...citaObj} );
 
@@ -123,4 +123,8 @@ export function cargarEdicion(cita) {
 
     editando = true;
 
+}
+
+export function suma(a,b) {
+    return a + b;
 }
