@@ -94,6 +94,8 @@ export function reiniciarObjeto() {
 export function eliminarCita(id) {
     administrarCitas.eliminarCita(id);
 
+    ui.imprimirAlerta('Se eliminó Correctamente')
+
     ui.imprimirCitas(administrarCitas)
 }
 
