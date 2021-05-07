@@ -7,7 +7,7 @@ describe('Carga la página principal', () => {
         cy.visit('/index.html');
 
         //Verificar el elemento y su texto
-        cy.contains('[data-cy = "titulo-proyecto"]', 'Administrador de Pacientes de Veterinaria');7
+        cy.contains('[data-cy = "titulo-proyecto"]', 'Administrador de Pacientes de Veterinaria');
 
         //Verificar que exista
         cy.get('[data-cy = "titulo-proyecto"]').should('exist');
