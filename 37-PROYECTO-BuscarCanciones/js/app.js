@@ -5,6 +5,8 @@ UI.formularioBuscar.addEventListener('submit', buscarCancion);
 
 function buscarCancion(e) {
     e.preventDefault();
+
+    
     UI.divResultado.textContent = '';
     UI.headingResultado.textContent = '';
 

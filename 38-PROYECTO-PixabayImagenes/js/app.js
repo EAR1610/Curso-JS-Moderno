@@ -80,9 +80,7 @@ function *crearPaginador(total){
     }
 }
 
-function calcularPaginas(total) {
-    return parseInt( Math.ceil( total / registrosPorPagina ) );
-}
+const calcularPaginas = total => parseInt( Math.ceil( total / registrosPorPagina ) ); 
 
 function limpiarContenido() {
     while (resultado.firstChild) {

@@ -68,7 +68,7 @@ function submitFormulario(e) {
 
     //Consultar la API con los resultados
 
-    constultarAPI();
+    constultarAPI( moneda, criptomoneda );
 }
 
 function mostrarAlerta(mensaje) {
@@ -90,8 +90,7 @@ function mostrarAlerta(mensaje) {
     
 }
 
-async function constultarAPI() {
-    const { moneda, criptomoneda } = objBusqueda;
+async function constultarAPI( moneda, criptomoneda ) {
 
     const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${criptomoneda}&tsyms=${moneda}`;
 

@@ -27,7 +27,6 @@ class API {
                 setTimeout(() => {
                     UI.divMensajes.innerHTML = '';
                     UI.divMensajes.classList.remove('error');
-                    UI.formularioBuscar.reset();
                 }, 3000);
             })            
     }

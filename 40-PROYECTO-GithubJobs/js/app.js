@@ -31,7 +31,7 @@ function consultarAPI(busqueda) {
     const url = `https://api.allorigins.win/get?url=${ encodeURIComponent( githubURL ) }`;
 
     axios.get(url)
-        .then(respuesta => mostarVacantes(JSON.parse( respuesta.data.contents )))
+        .then( respuesta => mostarVacantes( JSON.parse( respuesta.data.contents ) ) )
 }
 
 function mostarMensaje(mensaje) {
@@ -65,7 +65,7 @@ function mostarVacantes(vacantes) {
     if(vacantes.length > 0){
         resultado.classList.add('grid');
 
-        vacantes.forEach(vacante => {
+        vacantes.forEach( vacante => {
             const { company, title, type, url, created_at, company_url } = vacante;
 
             resultado.innerHTML += `

@@ -17,7 +17,7 @@ function validarFormulario(e) {
     
     const terminoBusqueda = document.querySelector('#termino').value;
     
-    if(terminoBusqueda === '' ) {
+    if( terminoBusqueda === '' ) {
         mostrarAlerta('Agrega un término de búsqueda');
         return;
     }
@@ -29,7 +29,7 @@ function mostrarAlerta(mensaje) {
 
     const existeAlerta = document.querySelector('.bg-red-100');
 
-    if(!existeAlerta) {
+    if( !existeAlerta ) {
         const alerta = document.createElement('p');
         alerta.classList.add('bg-red-100', 'border-red-400', 'text-red-700', 'px-4', 'py-3', 'rounded', 'max-w-lg', 'mx-auto', 'mt-6', 'text-center');
     
@@ -66,7 +66,7 @@ async function buscarImagenes() {
         const respuesta = await fetch( url );
         const resultado = await respuesta.json();
         totalPaginas = calcularPaginas(resultado.totalHits);
-        mostrarImagenes(resultado.hits);
+        mostrarImagenes( resultado.hits );
     } catch (error) {
         console.log(error);
     }
@@ -74,22 +74,16 @@ async function buscarImagenes() {
 
 // Generador que va a registrar la cantidad de elementos de acuerdo a las paginas
 function *crearPaginador(total) {
-    for (let i = 1; i <= total; i++ ) {
+    for ( let i = 1; i <= total; i++ ) {
         yield i;
     }
 }
 
+const calcularPaginas = total => parseInt( Math.ceil( total / registrosPorPagina ) );
 
-function calcularPaginas(total) {
-    return parseInt( Math.ceil( total / registrosPorPagina ));
-}
-
-function mostrarImagenes(imagenes) {
-    // console.log(imagenes);
+function mostrarImagenes( imagenes ) {
     
-    while(resultado.firstChild) {
-        resultado.removeChild(resultado.firstChild);
-    }
+    limpiarHTML();
 
     // Iterar sobre el arreglo de imagenes y construir el HTML
     imagenes.forEach( imagen => {
@@ -118,22 +112,34 @@ function mostrarImagenes(imagenes) {
     });
 
     // Limpiar el paginador previo
-    while(paginacionDiv.firstChild) {
-        paginacionDiv.removeChild(paginacionDiv.firstChild)
-    }
+    limpiarPaginador();
 
-    // Generamos el nuevo HTML
+    // Generamos el nuevo Paginador
     imprimirPaginador();
 
 }
 
+function limpiarPaginador(){
+
+    while( paginacionDiv.firstChild ) {
+        paginacionDiv.removeChild(paginacionDiv.firstChild)
+    }
+}
+
+
+function limpiarHTML() {
+
+    while( resultado.firstChild ) {
+        resultado.removeChild( resultado.firstChild );
+    }
+}
 
 function imprimirPaginador() {
     iterador = crearPaginador(totalPaginas);
 
-    while(true) {
+    while( true ) {
         const { value, done} = iterador.next();
-        if(done) return;
+        if( done ) return;
 
         // Caso contrario, genera un botón por cada elemento en el generador
         const boton = document.createElement('a');
