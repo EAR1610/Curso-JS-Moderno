@@ -2,6 +2,7 @@ import { nuevoCliente, obtenerClientes } from './API.js';
 import { mostrarAlerta, mostrarExito } from './funciones.js';
 
 (function() {
+    
     let emailDuplicado = false;
     const formulario = document.querySelector('#formulario');
     formulario.addEventListener('submit', validarCliente);
@@ -28,13 +29,17 @@ import { mostrarAlerta, mostrarExito } from './funciones.js';
 
         const clientes = await obtenerClientes();
 
-        clientes.forEach( cliente => {  //Comprobamos si el Email existe en nuestra BBDD
+        clientes.forEach( cliente => {  
             const { email } = cliente;
 
             if ( miCliente.email === email ) {
                 mostrarAlerta('El Email ya esta registrado');
                 emailDuplicado = true;
-                document.location.reload()
+
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 3000);
+                
                 return;
             }
         })

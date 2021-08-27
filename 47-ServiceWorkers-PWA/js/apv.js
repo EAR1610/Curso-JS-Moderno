@@ -28,7 +28,7 @@ function eventListeners() {
     telefonoInput.addEventListener('change', datosCita);
     fechaInput.addEventListener('change', datosCita);
     horaInput.addEventListener('change', datosCita);
-    sintomasInput.addEventListener('change', datosCita);
+    sintomasInput.addEventListener('change', datosCita);        
 }
 
 const citaObj = {
@@ -48,10 +48,10 @@ function datosCita(e) {
 // CLasses
 class Citas {
     constructor() {
-        this.citas = []
+        this.citas = JSON.parse( localStorage.getItem('misCitas') ) || [];
     }
     agregarCita( cita ) {
-        this.citas = [...this.citas, cita];
+        this.citas = [ ...this.citas, cita ];
     }
     editarCita( citaActualizada ) {
         this.citas = this.citas.map( cita => cita.id === citaActualizada.id ? citaActualizada : cita )
@@ -78,26 +78,24 @@ class UI {
             divMensaje.classList.add('text-center', 'alert', 'd-block', 'col-12');
             
             // Si es de tipo error agrega una clase
-            if( tipo === 'error' ) {
+            if( tipo ) {
                 divMensaje.classList.add('alert-danger');
             } else {
                 divMensaje.classList.add('alert-success');
             }
-
-            // Mensaje de error
+            
             divMensaje.textContent = mensaje;
 
             // Insertar en el DOM
             document.querySelector('#contenido').insertBefore( divMensaje , document.querySelector('.agregar-cita') );
-
-            // Quitar el alert despues de 3 segundos
+            
             setTimeout( () => {
                 divMensaje.remove();
             }, 3000);
         }
    }
 
-   imprimirCitas( { citas } ) { // Se puede aplicar destructuring desde la función...
+   imprimirCitas( { citas } ) { 
        
         this.limpiarHTML();
 
@@ -132,14 +130,13 @@ class UI {
 
             // Agregar un botón de eliminar...
             const btnEliminar = document.createElement('button');
-            btnEliminar.onclick = () => eliminarCita( id ); // añade la opción de eliminar
+            btnEliminar.onclick = () => eliminarCita( id ); 
             btnEliminar.classList.add('btn', 'btn-danger', 'mr-2');
             btnEliminar.innerHTML = 'Eliminar <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>'
 
             // Añade un botón de editar...
             const btnEditar = document.createElement('button');
-            btnEditar.onclick = () => cargarEdicion(cita);
-
+            btnEditar.onclick = () => cargarEdicion( cita );
             btnEditar.classList.add('btn', 'btn-info');
             btnEditar.innerHTML = 'Editar <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>'
 
@@ -154,7 +151,9 @@ class UI {
             divCita.appendChild(btnEditar)
 
             contenedorCitas.appendChild(divCita);
-        });    
+        });
+
+        SincronizarStorage(citas);    
    }
 
    textoHeading( citas ) {
@@ -174,16 +173,15 @@ class UI {
 
 
 const administrarCitas = new Citas();
-console.log( administrarCitas );
 const ui = new UI( administrarCitas );
+
+ui.imprimirCitas( administrarCitas );
 
 function nuevaCita(e) {
     e.preventDefault();
 
-    const { mascota, propietario, telefono, fecha, hora, sintomas } = citaObj;
-
     // Validar
-    if( mascota === '' || propietario === '' || telefono === '' || fecha === ''  || hora === '' || sintomas === '' ) {
+    if( validar( citaObj ) ) {
         ui.imprimirAlerta('Todos los campos son Obligatorios', 'error')
 
         return;
@@ -191,22 +189,22 @@ function nuevaCita(e) {
 
     if( editando ) {
         // Estamos editando
-        administrarCitas.editarCita( {...citaObj} );
+        administrarCitas.editarCita( { ...citaObj } );
 
-        ui.imprimirAlerta('Guardado Correctamente');
+        ui.imprimirAlerta('Editado Correctamente');
 
         formulario.querySelector('button[type="submit"]').textContent = 'Crear Cita';
 
         editando = false;
 
     } else {
-        // Nuevo Registrando
+        // Nuevo Registro
 
         // Generar un ID único
         citaObj.id = Date.now();
         
         // Añade la nueva cita
-        administrarCitas.agregarCita({...citaObj});
+        administrarCitas.agregarCita( { ...citaObj } );
 
         // Mostrar mensaje de que todo esta bien...
         ui.imprimirAlerta('Se agregó correctamente')
@@ -214,7 +212,7 @@ function nuevaCita(e) {
 
 
     // Imprimir el HTML de citas
-    ui.imprimirCitas(administrarCitas);
+    ui.imprimirCitas( administrarCitas );
 
     // Reinicia el objeto para evitar futuros problemas de validación
     reiniciarObjeto();
@@ -224,8 +222,15 @@ function nuevaCita(e) {
 
 }
 
+function validar( obj ) {
+    return !Object.values(obj).every(element => element !== '');
+}
+
+function SincronizarStorage( citas ){
+    localStorage.setItem('misCitas', JSON.stringify( citas ));
+}
+
 function reiniciarObjeto() {
-    // Reiniciar el objeto
     citaObj.mascota = '';
     citaObj.propietario = '';
     citaObj.telefono = '';
@@ -236,14 +241,28 @@ function reiniciarObjeto() {
 
 
 function eliminarCita( id ) {
-    administrarCitas.eliminarCita(id);
-
-    ui.imprimirCitas(administrarCitas)
+    Swal.fire({
+        title: '¿Estas seguro?',
+        text: "Una cita eliminada, no podrá recuperarse!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, eliminarla!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Eliminada!',
+            'La cita ha sido eliminada',
+            'success'
+          )
+          administrarCitas.eliminarCita( id );
+          ui.imprimirCitas( administrarCitas );
+        }
+      })    
 }
 
-function cargarEdicion( cita ) {
-
-    const { mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
+function cargarEdicion( { mascota, propietario, telefono, fecha, hora, sintomas, id } ) {
 
     // Reiniciar el objeto
     citaObj.mascota = mascota;

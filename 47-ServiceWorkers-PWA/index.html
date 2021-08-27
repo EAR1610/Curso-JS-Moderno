@@ -73,6 +73,34 @@
 
     <script src="js/app.js"></script>
     <script src="js/apv.js"></script>
+    <!-- Script para generar seguridad de la página-->
+    <script language="Javascript">
+        document.oncontextmenu = function(){return false}
+
+        document.onkeydown = function(e) {
+                if (e.ctrlKey && 
+                    (e.keyCode === 85)) {
+                    return false;
+                }
+                if (e.ctrlKey && 
+                    (e.keyCode === 83)) {
+                    return false;
+                }
+                if (e.ctrlKey && 
+                    (e.keyCode === 73)) {
+                    return false;
+                }
+                if (e.ctrlKey && 
+                    (e.keyCode === 74)) {
+                    return false;
+                }
+
+                if(e.keyCode == 123) {
+                return false;
+            }
+        };
+    </script> 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 </html>

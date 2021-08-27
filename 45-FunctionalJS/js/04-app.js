@@ -9,9 +9,7 @@ const carrito = [
     { nombre: 'Laptop', precio: 800},
 ];
 
-const obtenerNombres = producto => {
-    return producto["nombre"];
-}
+const obtenerNombres = producto =>  producto["nombre"];
 
 const resultado = carrito.map( obtenerNombres );
 console.log( resultado );

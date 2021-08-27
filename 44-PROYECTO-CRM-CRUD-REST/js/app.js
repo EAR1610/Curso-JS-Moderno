@@ -1,6 +1,6 @@
 import { obtenerClientes, eliminarCliente } from './API.js';
 
-(function() {
+( function() {
     const listado = document.querySelector('#listado-clientes');
     listado.addEventListener('click', confirmarEliminar);
 
@@ -37,12 +37,11 @@ import { obtenerClientes, eliminarCliente } from './API.js';
 
    async function confirmarEliminar(e) {
         if( e.target.classList.contains('eliminar') ) {
-            const clienteId = parseInt( e.target.dataset.cliente)
-            console.log(clienteId);
+            const clienteId = parseInt( e.target.dataset.cliente )
             const confirmar = confirm('¿Deseas eliminar este cliente?');
 
             if( confirmar ) {
-                await eliminarCliente(clienteId)
+                await eliminarCliente( clienteId )
             }
 
         }

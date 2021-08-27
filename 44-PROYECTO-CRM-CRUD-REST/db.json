@@ -2,9 +2,9 @@
   "clientes": [
     {
       "nombre": "Alexander Reynoso",
-      "email": "alexreynosoruano741@github.com",
+      "email": "alexreynosoruano741@gmail.com",
       "telefono": "33554285",
-      "empresa": "Github",
+      "empresa": "Sería mi primer trabajo",
       "id": 1
     },
     {
@@ -15,46 +15,18 @@
       "id": 2
     },
     {
-      "nombre": "Bill Gates",
-      "email": "bill@microsoft.com",
-      "telefono": "0145887765",
-      "empresa": "Microsoft Corporation",
+      "nombre": "Tim Cook",
+      "email": "tim@apple.com",
+      "telefono": "+17588896554",
+      "empresa": "Apple Inc",
       "id": 3
     },
     {
-      "nombre": "Jeff Bezos",
-      "email": "jeff@amazon.com",
-      "telefono": "019965874532",
-      "empresa": "Amazon Inc",
-      "id": 4
-    },
-    {
-      "nombre": "Tim Cook",
-      "email": "tim@apple.com",
-      "telefono": "17588896554",
-      "empresa": "Apple Inc",
-      "id": 5
-    },
-    {
-      "nombre": "Leonardo Da Vinci",
-      "email": "leonardo@davinci.com",
-      "telefono": "2756899985",
-      "empresa": "Monalisa Inc",
-      "id": 6
-    },
-    {
-      "nombre": "Magnus Carlsen",
-      "email": "magnus@chess.com",
-      "telefono": "1475996532",
-      "empresa": "Chess Championship",
-      "id": 7
-    },
-    {
-      "nombre": "Isaac Newton",
+      "nombre": "Isaac Newton ",
       "email": "isaac@newton.com",
-      "telefono": "36412589455",
-      "empresa": "Calculo Inc.",
-      "id": 8
+      "telefono": "4651561165",
+      "empresa": "Calculo.Inc 2",
+      "id": 4
     }
   ]
 }

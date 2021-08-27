@@ -11,15 +11,12 @@ const carrito = [
 
 //Las dos instrucciones realizan lo mismo, dato importante: se aplica la inmutabilidad, el arreglo no es modificado
 
-// const resultado = carrito.filter( producto => {
-//     return producto.precio > 400;
-// });
+// const resultado = carrito.filter( producto => producto.precio > 400 );
 // console.log( resultado )
 // console.log( carrito )
 
-const mayorA400 = producto => {
-    return producto.precio > 400;
-}
+const mayorA400 = producto => producto.precio > 400;
+
 const resultado = carrito.filter( mayorA400 );
 console.log( resultado );
 console.log( carrito );

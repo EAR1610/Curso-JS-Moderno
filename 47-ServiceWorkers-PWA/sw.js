@@ -5,6 +5,7 @@ const assets = [
     './index.html',
     './error.html',
     './js/app.js',
+    './js/apv.js',
     './css/bootstrap.css',
     './css/styles.css',
 ];
@@ -50,9 +51,7 @@ self.addEventListener('fetch', e => {
 
     e.respondWith(
         caches.match( e.request )
-            .then(respuestaCache => {
-                return respuestaCache || fetch( e.request );
-            })
+            .then( respuestaCache => respuestaCache || fetch( e.request ))
             .catch( () => caches.match('./error.html') )
     );
 });
