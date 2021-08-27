@@ -4,7 +4,7 @@ const footer = document.querySelector('.footer');
 btnFlotante.addEventListener('click', MostrarOcultarFoooter)
 
 function MostrarOcultarFoooter() {
-    if (footer.classList.contains('activo')) {
+    if ( footer.classList.contains('activo') ) {
         footer.classList.remove('activo');
         this.classList.remove('activo');
         this.textContent = 'Idioma y Moneda';

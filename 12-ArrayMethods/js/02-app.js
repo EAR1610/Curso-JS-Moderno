@@ -9,7 +9,7 @@ const carrito = [
     { nombre: 'Celular', precio: 700 },
 ]
 
-meses.forEach((mes, index)=>{
+meses.forEach((mes, index) => {
     if ( mes === 'Abril') {
         console.log(`${mes} encontrado en el indice ${index}`);
     }
