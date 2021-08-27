@@ -5,9 +5,10 @@ import { mascotaInput, propietarioInput, telefonoInput,
         fechaInput, horaInput, sintomasInput, formulario 
 } from './selectores.js';
 
-const administrarCitas = new Citas();
-const ui = new UI(administrarCitas);
+export const administrarCitas = new Citas();
+const ui = new UI( administrarCitas );
 
+ui.imprimirCitas( administrarCitas );
 
 let editando = false;
 
@@ -28,7 +29,7 @@ export function datosCita(e) {
 export function nuevaCita(e) {
     e.preventDefault();
 
-    const {mascota, propietario, telefono, fecha, hora, sintomas } = citaObj;
+    const { mascota, propietario, telefono, fecha, hora, sintomas } = citaObj;
 
     // Validar
     if( mascota === '' || propietario === '' || telefono === '' || fecha === ''  || hora === '' || sintomas === '' ) {
@@ -37,11 +38,11 @@ export function nuevaCita(e) {
         return;
     }
 
-    if(editando) {
+    if( editando ) {
         // Estamos editando
-        administrarCitas.editarCita( {...citaObj} );
+        administrarCitas.editarCita( { ...citaObj } );
 
-        ui.imprimirAlerta('Guardado Correctamente');
+        ui.imprimirAlerta('Cita Actualizada Correctamente');
 
         formulario.querySelector('button[type="submit"]').textContent = 'Crear Cita';
 
@@ -54,7 +55,7 @@ export function nuevaCita(e) {
         citaObj.id = Date.now();
         
         // Añade la nueva cita
-        administrarCitas.agregarCita({...citaObj});
+        administrarCitas.agregarCita( { ...citaObj } );
 
         // Mostrar mensaje de que todo esta bien...
         ui.imprimirAlerta('Se agregó correctamente')
@@ -62,7 +63,7 @@ export function nuevaCita(e) {
 
 
     // Imprimir el HTML de citas
-    ui.imprimirCitas(administrarCitas);
+    ui.imprimirCitas( administrarCitas );
 
     // Reinicia el objeto para evitar futuros problemas de validación
     reiniciarObjeto();
@@ -91,7 +92,7 @@ export function eliminarCita(id) {
 
 export function cargarEdicion(cita) {
 
-    const {mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
+    const { mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
 
     // Reiniciar el objeto
     citaObj.mascota = mascota;

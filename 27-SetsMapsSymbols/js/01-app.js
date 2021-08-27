@@ -9,10 +9,10 @@ carrito.add('Disco N3');
 console.log( carrito.delete('Disco N3') ); //Return true
 
 //Comprobar si un valor existe en el set
-// console.log( carrito.has('Guitarra') );
+// console.log( carrito.has('Guitarra') ); //false
 
 //Medir su longitud de los sets
-// console.log(carrito.size);
+// console.log(carrito.size);  //3
 
 //Elimina todos los elementos del set
 // carrito.clear();

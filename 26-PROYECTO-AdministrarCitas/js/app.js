@@ -31,31 +31,37 @@ class Citas {
 }
 
 class UI {
-    ImprimirAlerta(mensaje, tipo) {
+    ImprimirAlerta( mensaje, tipo ) {
         //Crear el div
-        const divMensaje = document.createElement('div');
-        divMensaje.classList.add('text-center', 'alert', 'd-block', 'col-12');
+        const alertaPrevia = document.querySelector('.alert');
 
-        //Agregar clase en base al tipo de error
-        if (tipo === 'error') {
-            divMensaje.classList.add('alert-danger');
-        } else {
-            divMensaje.classList.add('alert-success');
-        }
+        if( !alertaPrevia ) {
 
-        //Mensaje de error
-        divMensaje.textContent = mensaje;
+            const divMensaje = document.createElement('div');
+            
+            divMensaje.classList.add('text-center', 'alert', 'd-block', 'col-12');
 
-        //Agregar al DOM
-        document.querySelector('#contenido').insertBefore(divMensaje, document.querySelector('.agregar-cita'));
+            //Agregar clase en base al tipo de error
+            if (tipo === 'error') {
+                divMensaje.classList.add('alert-danger');
+            } else {
+                divMensaje.classList.add('alert-success');
+            }
 
-        //Eliminar la alerta despues de 5 segundos
-        setTimeout(() => {
-            divMensaje.remove();
-        }, 5000);
+            //Mensaje de error
+            divMensaje.textContent = mensaje;
+
+            //Agregar al DOM
+            document.querySelector('#contenido').insertBefore(divMensaje, document.querySelector('.agregar-cita'));
+
+            //Eliminar la alerta despues de 5 segundos
+            setTimeout(() => {
+                divMensaje.remove();
+            }, 5000);
+        } 
     }
 
-    ImprimirCitas({citas}) {
+    ImprimirCitas( { citas } ) {
 
         this.LimpiarHTML();
 
@@ -99,7 +105,7 @@ class UI {
             //Boton para eliminar este cita
             const btnEliminar = document.createElement('button');
             btnEliminar.classList.add('btn', 'btn-danger', 'mr-2');
-            btnEliminar.innerHTML = 'Eliminar <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>';
+            btnEliminar.innerHTML = `Eliminar <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
             btnEliminar.onclick = () => EliminarCita(id);
 
             //Añade un boton para editar
@@ -124,7 +130,7 @@ class UI {
     }
 
     LimpiarHTML() {
-        while (contenedorCitas.firstChild) {
+        while ( contenedorCitas.firstChild ) {
             contenedorCitas.removeChild( contenedorCitas.firstChild );
         }
     }
@@ -179,7 +185,7 @@ function NuevaCita(e) {
         ui.ImprimirAlerta('Cita editada correctamente');
 
         //Pasar el objeto de la cita a edición
-        administrarCitas.EditarCita({...citaObj});
+        administrarCitas.EditarCita( {...citaObj} );
 
         //Regresar el texto del boton a su estado original
         formulario.querySelector('button[type = "submit"]').textContent = 'Crear cita';
@@ -191,7 +197,7 @@ function NuevaCita(e) {
          citaObj.id = Date.now();
 
         //Creando una nueva cita....
-        administrarCitas.AgregarCita({...citaObj});
+        administrarCitas.AgregarCita( {...citaObj} );
 
         //Mensaje de agregado correctamente
         ui.ImprimirAlerta('Cita agregada correctamente');
@@ -204,7 +210,7 @@ function NuevaCita(e) {
     formulario.reset();
 
     //Mostar el HTML de las citas
-    ui.ImprimirCitas(administrarCitas);
+    ui.ImprimirCitas( administrarCitas );
 }
 
 function ReiniciarObjeto() {

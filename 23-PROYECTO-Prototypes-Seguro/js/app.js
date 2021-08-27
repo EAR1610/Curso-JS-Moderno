@@ -67,26 +67,26 @@ UI.prototype.LlenarOpciones = () => {
         option.value = i;
         option.textContent = i;
 
-        selectYear.appendChild(option);
+        selectYear.appendChild( option );
     }
 }
 
 //Muestra alertas en pantalla
-UI.prototype.MostarMensaje =  (mensaje, tipo) => {
+UI.prototype.MostarMensaje =  ( mensaje, tipo ) => {
     const div = document.createElement('div');
 
-    if (tipo === 'error') {
+    if ( tipo === 'error' ) {
         div.classList.add('error');
     } else {
         div.classList.add('correcto');
     }
 
-    div.classList.add('mensaje', 'mt-10');
+    div.classList.add('mt-10');
     div.textContent = mensaje;
 
     //Insertar en el HTML
     const formulario = document.querySelector('#cotizar-seguro');
-    formulario.insertBefore(div, document.querySelector('#resultado') );
+    formulario.insertBefore( div, document.querySelector('#resultado') );
 
 
     setTimeout(() => {
@@ -94,7 +94,7 @@ UI.prototype.MostarMensaje =  (mensaje, tipo) => {
     }, 3000);
 }
 
-UI.prototype.MostrarResultado = (total, seguro) => {
+UI.prototype.MostrarResultado = ( total, seguro ) => {
 
     const { marca, year, tipo } = seguro;
     let tipoMarca;
@@ -168,7 +168,7 @@ function CotizarSeguro(e) {
     //Leer el tipo de cobertura
     const tipo = document.querySelector('input[name="tipo"]:checked').value
     
-    if (marca === '' || year === '' || tipo === '') {
+    if ( marca === '' ) {
         ui.MostarMensaje('Todos los campos son obligatorios', 'error')
         return;
     } 
@@ -178,7 +178,7 @@ function CotizarSeguro(e) {
     //Ocultar las cotizaciones previas
     const resultados = document.querySelector('#resultado div');
 
-    if (resultados !== null) {
+    if ( resultados !== null ) {
         resultados.remove();
     }
 

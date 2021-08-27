@@ -3,8 +3,6 @@ const formulario = document.querySelector('#agregar-gasto');
 const gastoListado = document.querySelector('#gastos ul');
 
 
-  
-
 //Eventos
 
 EventListener()
@@ -28,7 +26,7 @@ class Presupuesto {
     }
 
     CalcularRestante() {
-        const gastado = this.gastos.reduce( (total, gasto) => total + gasto.cantidad, 0); 
+        const gastado = this.gastos.reduce( ( total, gasto ) => total + gasto.cantidad, 0);
         this.restante = this.presupuesto - gastado;
     }
 
@@ -41,7 +39,7 @@ class Presupuesto {
 class UI {
     InsertarPresupuesto( cantidad ) {
         //Extrayendo los valores
-        const {presupuesto, restante} = cantidad;
+        const { presupuesto, restante } = cantidad;
 
         //Agregar al HTML
         document.querySelector('#total').textContent = presupuesto;
@@ -53,13 +51,12 @@ class UI {
         const divMensaje = document.createElement('div');
         divMensaje.classList.add('text-center', 'alert');
 
-        if (tipo === 'error') {
+        if ( tipo === 'error' ) {
             divMensaje.classList.add('alert-danger');
         } else {
             divMensaje.classList.add('alert-success');
         }
 
-        // Mensaje de Error
         divMensaje.textContent = mensaje;
 
         //Insertar en el HTML
@@ -112,8 +109,7 @@ class UI {
         document.querySelector('#restante').textContent = restante; 
     }
 
-    ComprobarPresupuesto(presupuestoObj) {
-        const { presupuesto, restante } = presupuestoObj;
+    ComprobarPresupuesto( { presupuesto, restante } ) {
 
         const restanteDiv = document.querySelector('.restante');
 
@@ -155,7 +151,7 @@ function PreguntarPresupuesto() {
         window.location.reload();     //Recarga la ventana actual
     }
 
-    presupuesto = new Presupuesto(presupuestoUsuario);
+    presupuesto = new Presupuesto( presupuestoUsuario );
     console.log(presupuesto);
 
     ui.InsertarPresupuesto(presupuesto);
@@ -171,7 +167,7 @@ function AgregarGasto(e) {
     const cantidad = Number( document.querySelector('#cantidad').value );
 
     //Validar
-    if (nombre === '' || cantidad === '') {
+    if ( nombre === '' ) {
         ui.ImprimirAlerta('Ambos campos son obligatorios', 'error');
 
         return;

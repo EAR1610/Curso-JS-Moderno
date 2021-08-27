@@ -3,42 +3,48 @@ import { contenedorCitas, heading } from '../selectores.js';
 
 class UI {
 
-    constructor({citas}) {
+    constructor( { citas } ) {
         this.textoHeading(citas);
     }
 
-    imprimirAlerta(mensaje, tipo) {
-        // Crea el div
-        const divMensaje = document.createElement('div');
-        divMensaje.classList.add('text-center', 'alert', 'd-block', 'col-12');
-        
-        // Si es de tipo error agrega una clase
-        if(tipo === 'error') {
-             divMensaje.classList.add('alert-danger');
-        } else {
-             divMensaje.classList.add('alert-success');
+    imprimirAlerta( mensaje, tipo ) {
+
+        const alertaPrevia = document.querySelector('.alert');
+
+        if( !alertaPrevia ) {
+            // Crea el div
+            const divMensaje = document.createElement('div');
+            divMensaje.classList.add('text-center', 'alert', 'd-block', 'col-12');
+
+            // Si es de tipo error agrega una clase
+            if(tipo === 'error') {
+                divMensaje.classList.add('alert-danger');
+            } else {
+                divMensaje.classList.add('alert-success');
+            }
+
+            // Mensaje de error
+            divMensaje.textContent = mensaje;
+
+            // Insertar en el DOM
+            document.querySelector('#contenido').insertBefore( divMensaje , document.querySelector('.agregar-cita'));
+
+            // Quitar el alert despues de 3 segundos
+            setTimeout( () => {
+                divMensaje.remove();
+            }, 3000);
         }
-
-        // Mensaje de error
-        divMensaje.textContent = mensaje;
-
-        // Insertar en el DOM
-        document.querySelector('#contenido').insertBefore( divMensaje , document.querySelector('.agregar-cita'));
-
-        // Quitar el alert despues de 3 segundos
-        setTimeout( () => {
-            divMensaje.remove();
-        }, 3000);
+        
    }
 
-   imprimirCitas({citas}) { // Se puede aplicar destructuring desde la función...
+   imprimirCitas( { citas } ) { // Se puede aplicar destructuring desde la función...
        
         this.limpiarHTML();
 
-        this.textoHeading(citas);
+        this.textoHeading( citas );
 
         citas.forEach(cita => {
-            const {mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
+            const { mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
 
             const divCita = document.createElement('div');
             divCita.classList.add('cita', 'p-3');
@@ -73,7 +79,6 @@ class UI {
             // Añade un botón de editar...
             const btnEditar = document.createElement('button');
             btnEditar.onclick = () => cargarEdicion(cita);
-
             btnEditar.classList.add('btn', 'btn-info');
             btnEditar.innerHTML = 'Editar <svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>'
 
@@ -88,21 +93,27 @@ class UI {
             divCita.appendChild(btnEditar)
 
             contenedorCitas.appendChild(divCita);
-        });    
+        }); 
+
+        this.SincronizarStorage( citas );
    }
 
-   textoHeading(citas) {
-        if(citas.length > 0 ) {
-            heading.textContent = 'Administra tus Citas '
+   textoHeading( citas ) {
+        if( citas.length > 0 ) {
+            heading.textContent = 'Administra tus Citas'
         } else {
             heading.textContent = 'No hay Citas, comienza creando una'
         }
     }
 
    limpiarHTML() {
-        while(contenedorCitas.firstChild) {
-            contenedorCitas.removeChild(contenedorCitas.firstChild);
+        while( contenedorCitas.firstChild ) {
+            contenedorCitas.removeChild( contenedorCitas.firstChild );
         }
+   }
+
+   SincronizarStorage( citas ) {
+       localStorage.setItem('citas', JSON.stringify( citas ) );
    }
 }
 

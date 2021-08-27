@@ -6,7 +6,7 @@ nuevaFuncion();
 console.log( nombreCliente ); 
 console.log( ahorro );
 
-console.log(mostrarInformacion ( nombreCliente, ahorro ) );
+console.log( mostrarInformacion ( nombreCliente, ahorro ) );
 tienesSaldo(ahorro);
 
 const cliente = new Cliente( nombreCliente, ahorro );

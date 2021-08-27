@@ -19,7 +19,7 @@ function crmDB() {
     }
     // si todo esta bien, asignar a database el resultado
     crmDB.onsuccess = function() {
-        // console.log('todo listo!');
+        console.log('todo listo!');
 
         // guardamos el resultado
         DB = crmDB.result;
