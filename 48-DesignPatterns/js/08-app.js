@@ -6,8 +6,8 @@ function Vendedor(nombre) {
 }
 
 Vendedor.prototype = {
-    oferta : (articulo, precio) => {
-        console.log(`Tenemos el sigueiten artículo ${articulo}, iniciamos con un precio ${precio}`);
+    oferta : ( articulo, precio ) => {
+        console.log(`Tenemos el siguiente artículo ${articulo}, iniciamos con un precio ${precio}`);
     },
     vendido : comprador => {
         console.log(`Vendido a ${comprador}`);
@@ -20,13 +20,13 @@ function Comprador(nombre) {
 }
 
 Comprador.prototype = {
-    oferta : (cantidad, comprador) => {
-        console.log(`${comprador.nombre} : ${cantidad}`);
+    oferta : ( cantidad, comprador ) => {
+        console.log(`${ comprador.nombre } : ${ cantidad }`);
     }
 }
 
 function Subasta() {
-    let compradores ={};
+    let compradores = { };
 
     return {
         registrar : usuario => {

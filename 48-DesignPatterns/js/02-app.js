@@ -17,7 +17,9 @@ class Cliente extends Persona{
 
 const persona = new Persona('Luis', 'correo@correo.com');
 console.log(persona);
+console.log(persona.email);
 
 const cliente = new Cliente('Alex', 'Git@hub.com', 'Github');
 
 console.log(cliente);
+console.log(cliente.empresa);

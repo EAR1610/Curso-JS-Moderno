@@ -1,6 +1,6 @@
 //Module Pattern
 
-const modulo1 = (function() {
+const modulo1 = ( function() {
     const nombre = 'Alexander';
 
     function hola() {
@@ -10,5 +10,5 @@ const modulo1 = (function() {
     return {
         nombre,
         hola
-    }
+    }    
 })();

@@ -14,14 +14,14 @@ class Cliente{
 
 const funcionesPersona = {
     mostrarInformacion(){
-        console.log(`Nombre persona: ${this.nombre} Email: ${this.email }`);
+        console.log(`Nombre persona: ${ this.nombre } Email: ${ this.email }`);
     },
     mostrarNombre(){
-        console.log(`Mi nombre es: ${this.nombre}`);
+        console.log(`Mi nombre es: ${ this.nombre }`);
     }
 }
 
-//Añadir funcionesPersona a la clase de Persona
+//Añadir funcionesPersona a la clase de Persona y Cliente
  Object.assign(Persona.prototype, funcionesPersona);
  Object.assign(Cliente.prototype, funcionesPersona);
 

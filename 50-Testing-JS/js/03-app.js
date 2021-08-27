@@ -51,7 +51,7 @@ function expected( esperado ) {
         toBe( resultado ) {
 
             if ( resultado !== esperado ) {
-                console.error(`El resultado ${resultado} es diferente a lo esperado; la prueba no pasó`);
+                console.error(`El resultado ${resultado} es diferente a lo esperado ${esperado}; la prueba no pasó`);
             } else {
                 console.log('La prueba pasó correctamente');
             }
@@ -59,7 +59,7 @@ function expected( esperado ) {
         toEqual( resultado ) {
 
             if ( resultado !== esperado ) {
-                console.error(`El resultado ${resultado} no es igual al esperado, la prueba no pasó`);
+                console.error(`El resultado ${resultado} no es igual al esperado${esperado}, la prueba no pasó`);
             } else {
                 console.log('La prueba pasó correctamente');
             }           

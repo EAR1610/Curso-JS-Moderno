@@ -22,20 +22,20 @@ restaurantApp.funciones = {
 
         console.log('Bienvenidos a nuestro menú');
 
-        platillos.forEach((platillo, indice) => {
-            console.log(`${indice} : ${platillo.platillo} ${platillo.precio}`);
+        platillos.forEach( ( platillo, indice ) => {
+            console.log(`${ indice } : ${ platillo.platillo } ${ platillo.precio }`);
         })
     },
     ordenar : id => {
-        console.log(`Tu platillo: ${restaurantApp.platillos[id].platillo} se esta preparando`);
+        console.log(`Tu platillo: ${ restaurantApp.platillos[id].platillo } se esta preparando`);
     },
-    agregarPlatillo : (platillo, precio) => {
+    agregarPlatillo : ( platillo, precio ) => {
         const nuevo = {
             platillo,
             precio
         };
 
-        restaurantApp.platillos.push(nuevo)
+        restaurantApp.platillos.push( nuevo )
     }
 }
 

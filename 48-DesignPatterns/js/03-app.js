@@ -3,11 +3,11 @@
 let instancia = null;
 
 class Persona{
-    constructor(nombre, email){
-        if (!instancia) {   //Si instancia es true
+    constructor(nombre, email){          
+        if (!instancia) {   //Si instancia no tiene un valor
             this.nombre = nombre;
             this.email = email;
-            instancia = this;
+            instancia = this; //Instancia va a ser igual a la clase Persona
         } else {
             return instancia;
         }
