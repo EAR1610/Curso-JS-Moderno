@@ -9,7 +9,7 @@
 <body class="min-h-100 bg-gray-200">
     <div class="md:flex min-h-screen md:align-top">
         <aside class="md:w-2/5 lg:w-2/5 xl:w-1/5 bg-teal-600 px-5 py-10">
-            <h1 class="uppercase text-white tracking-wide text-2xl  font-bold mt-2">CRM - IndexedDB</h1>
+            <h1 class="uppercase text-white tracking-wide text-2xl  font-bold mt-2">CRM - Indexed DB</h1>
             <p class="mt-10 text-white">Administra tus Clientes con el CRM - IndexedDB</p>
             <nav class="mt-8">
                 <a  
@@ -17,7 +17,7 @@
                     class="px-3 py-1 text-white block hover:bg-teal-700 hover:text-yellow-400 "
                 >Clientes</a>
                 <a 
-                    href="nuevo-cliente.html" 
+                    href="#" 
                     class="px-3 py-1 text-white block hover:bg-teal-900 mt-2 hover:text-yellow-400 bg-teal-700"
                 >Nuevo Cliente</a>
             </nav>
@@ -84,7 +84,32 @@
             </div>
         </main>
     </div>
-    <!-- <script src="js/funciones.js"></script> -->
     <script src="js/nuevocliente.js"></script>
+    <script language="Javascript">
+        document.oncontextmenu = function(){return false}
+
+        document.onkeydown = function(e) {
+                if (e.ctrlKey && 
+                    (e.keyCode === 85)) {
+                    return false;
+                }
+                if (e.ctrlKey && 
+                    (e.keyCode === 83)) {
+                    return false;
+                }
+                if (e.ctrlKey && 
+                    (e.keyCode === 73)) {
+                    return false;
+                }
+                if (e.ctrlKey && 
+                    (e.keyCode === 74)) {
+                    return false;
+                }
+
+                if(e.keyCode == 123) {
+                return false;
+            }
+        };
+    </script>
 </body>
 </html>

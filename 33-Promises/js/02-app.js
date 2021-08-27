@@ -1,7 +1,7 @@
 //Callback hell
 const paises = []; 
 
-function nuevoPais(pais, callback) {
+function nuevoPais( pais, callback ) {
     paises.push(pais);
     console.log(`Agregado: ${pais}`);
     callback();

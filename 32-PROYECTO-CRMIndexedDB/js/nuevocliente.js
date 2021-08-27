@@ -30,13 +30,12 @@
     function validarCliente(e) {
         e.preventDefault();
 
-
         const nombre = document.querySelector('#nombre').value;
         const email = document.querySelector('#email').value;
         const telefono = document.querySelector('#telefono').value;
         const empresa = document.querySelector('#empresa').value;
 
-        if(nombre === '' || email === '' || telefono === '' || empresa === '') {
+        if( nombre === '' || email === '' || telefono === '' || empresa === '' ) {
              imprimirAlerta('Todos los campos son obligatorios', 'error');
             return;
         }
@@ -54,24 +53,20 @@
         // Generar un ID único
         cliente.id = Date.now();
 
-        crearNuevoCliente(cliente);
+        crearNuevoCliente( cliente );
 
         formulario.reset();
     }
 
-    function crearNuevoCliente(cliente) {
-
-        
+    function crearNuevoCliente( cliente ) {    
 
         // NUEVO: 
         const transaction = DB.transaction(['crm'], 'readwrite');
         const objectStore = transaction.objectStore('crm');
-        // console.log(objectStore);
-        objectStore.add(cliente);
+
+        objectStore.add( cliente );
 
         transaction.oncomplete = () => {
-            console.log('Cliente Agregado');
-
             // Mostrar mensaje de que todo esta bien...
             imprimirAlerta('Se agregó correctamente');
 
@@ -81,33 +76,39 @@
         };
 
         transaction.onerror = () => {
-            console.log('Hubo un error!');
-            imprimirAlerta('Hubo un Error', 'error');
+            imprimirAlerta('El Email ya existe', 'error');
+
+            setTimeout(() => {
+                window.location.href = 'index.html'
+            }, 3000);
         };
     }
 
-    function imprimirAlerta(mensaje, tipo) {
-         // Crea el div
+    function imprimirAlerta( mensaje, tipo ) {
 
-         const divMensaje = document.createElement('div');
-         divMensaje.classList.add( "px-4", "py-3", "rounded",  "max-w-lg", "mx-auto", "mt-6", "text-center" );
+        const alertaPrevia = document.querySelector('.alert');
 
-         if(tipo === 'error') {
-            divMensaje.classList.add('bg-red-100', "border-red-400", "text-red-700");
-         } else {
-             divMensaje.classList.add('bg-green-100', "border-green-400", "text-green-700");
-         }
-         
-         // Mensaje de error
-         divMensaje.textContent = mensaje;
- 
-         // Insertar en el DOM
-        formulario.appendChild(divMensaje);
- 
-         // Quitar el alert despues de 3 segundos
-         setTimeout( () => {
-             divMensaje.remove();
-         }, 3000);
+        if ( !alertaPrevia ) {
+            // Crea el div
+            const divMensaje = document.createElement('div');
+            divMensaje.classList.add( "px-4", "py-3", "rounded",  "alert", "max-w-lg", "mx-auto", "mt-6", "text-center" );
+
+            if( tipo === 'error' ) {
+                divMensaje.classList.add('bg-red-100', "border-red-400", "text-red-700");
+            } else {
+                divMensaje.classList.add('bg-green-100', "border-green-400", "text-green-700");
+            }
+            
+            // Mostrar Mensaje 
+            divMensaje.textContent = mensaje;
+    
+            // Insertar en el DOM
+            formulario.appendChild( divMensaje );
+    
+            // Quitar el alert despues de 3 segundos
+            setTimeout( () => {
+                divMensaje.remove();
+            }, 3000);
+        }
     }
-
 })();

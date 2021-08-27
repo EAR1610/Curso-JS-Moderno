@@ -1,14 +1,55 @@
 (function() {
     let DB;
 
+    const listadoClientes = document.querySelector('#listado-clientes');
+
     document.addEventListener('DOMContentLoaded', () => {
         crearDB();
     
-        if(window.indexedDB.open('crm', 1)) {
+        if( window.indexedDB.open('crm', 1) ) {
             obtenerClientes();
         }
         
+        listadoClientes.addEventListener('click', EliminarRegistro);
     });
+
+    function EliminarRegistro(e) {
+
+        if( e.target.classList.contains('eliminar') ) {
+            
+            const idEliminar = Number( e.target.dataset.cliente );
+
+            Swal.fire({
+                title: '¿Estas Seguro(a)?',
+                text: "Un registro eliminado, no puede recuperarse!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!'
+              }).then( result => {
+                if ( result.isConfirmed ) {
+                  Swal.fire(
+                    'Eliminado!',
+                    'El registro se ha eliminado',
+                    'success'
+                  )
+                  const transaction = DB.transaction(['crm'], 'readwrite');
+                  const objectStore = transaction.objectStore('crm');
+  
+                  objectStore.delete( idEliminar );
+  
+                  transaction.oncomplete = function () {
+                      e.target.parentElement.parentElement.remove();
+                  }
+  
+                  transaction.onerror = function() {
+                      console.log('Hubo un error');
+                  }
+                }
+              })
+        }
+    }
     
     // Código de IndexedDB
     function crearDB() {
@@ -42,9 +83,6 @@
             objectStore.createIndex('telefono', 'telefono', { unique: false } );
             objectStore.createIndex('empresa', 'empresa', { unique: false } );
             objectStore.createIndex('id', 'id', { unique: true } );
-    
-            
-            console.log('Database creada y lista');
         };
     
     }
@@ -66,18 +104,16 @@
 
             const objectStore = DB.transaction('crm').objectStore('crm');
 
-
             // retorna un objeto request o petición, 
             objectStore.openCursor().onsuccess = function(e) {
-                 // cursor se va a ubicar en el registro indicado para accede ra los datos
-                 const cursor = e.target.result;
 
-                //  console.log(e.target);
+                 // cursor se va a ubicar en el registro indicado para acceder a los datos
+                 const cursor = e.target.result;
      
-                 if(cursor) {
+                 if( cursor ) {
+
                     const { nombre, empresa, email, telefono, id } = cursor.value;
                     
-                    const listadoClientes = document.querySelector('#listado-clientes');
                     listadoClientes.innerHTML += `
 
                         <tr>
@@ -93,23 +129,14 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5">
                                 <a href="editar-cliente.html?id=${id}" class="text-teal-600 hover:text-teal-900 mr-5">Editar</a>
-                                <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900">Eliminar</a>
+                                <a href="#" data-cliente="${id}" class="text-red-600 hover:text-red-900 eliminar">Eliminar</a>
                             </td>
                         </tr>
                     `;
         
                     cursor.continue();
-                 } else {
-                    //  console.log('llegamos al final...');
-                 }
+                 } 
              };
-
-
-
         };
-
-
     }
-    
-
 })();

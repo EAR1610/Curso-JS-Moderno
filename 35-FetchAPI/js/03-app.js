@@ -17,7 +17,7 @@ function mostrarHTML(empleados) {
     empleados.forEach( empleado => {
         const { id, nombre, empresa, trabajo } = empleado; 
 
-        html+= `
+        html += `
             <p>Empleado: ${nombre}</p>
             <p>ID: ${id}</p>
             <p>Empresa: ${empresa}</p>

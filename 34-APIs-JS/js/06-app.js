@@ -28,8 +28,8 @@ function ejecutarSpeechAPI() {
 
         console.log(e.results);
 
-        var transcript = e.results[0][0].transcript;
-        var confidence = e.results[0][0].confidence;
+        let transcript = e.results[0][0].transcript;
+        let confidence = e.results[0][0].confidence;
 
 
         const speech = document.createElement('p');

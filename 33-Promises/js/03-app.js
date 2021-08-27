@@ -1,9 +1,9 @@
 //Promises
-const aplicarDescuento = new Promise( (resolve, reject) => {
+const aplicarDescuento = new Promise( ( resolve, reject ) => {
 
-    const descuento = true;
+    const descuento = false;
 
-   if (descuento) {
+   if ( descuento ) {
        resolve('Descuento aplicado');
    } else {
        reject('No se pudo aplicar el descuento');
@@ -11,16 +11,16 @@ const aplicarDescuento = new Promise( (resolve, reject) => {
 });
 
 aplicarDescuento
-    .then(resultado => descuento(resultado))
+    .then(resultado => descuento( resultado ) )
     //Siempre que el promise falle, tenemos acceso al .catch
-    .catch(error => console.log(error) )
+    .catch( error => descuento( error ) )
 
 
-//Hay 3 valores posbiles
+//Hay 3 valores posibiles
 //fulfilled - El promise se cumplió
 //rejected - El promise no se cumplió
-//pending - nNo se ha cumplido, ni tampoco rechazado
+//pending - No se ha cumplido, ni tampoco rechazado
 
-function descuento(mensaje) {
+function descuento( mensaje ) {
     console.log(mensaje);
 }

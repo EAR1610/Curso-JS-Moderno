@@ -1,10 +1,36 @@
 const container = document.querySelector('.container');
 const resultado = document.querySelector('#resultado');
 const formulario = document.querySelector('#formulario');
+const busquedaVoz = document.querySelector('#busquedaVoz');
 
 window.addEventListener('load', () => {
     formulario.addEventListener('submit', buscarClima);
+
+    busquedaVoz.onclick = () => BuscarPorVoz();    
 })
+
+function BuscarPorVoz() {
+    const SpeechRecognition = webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+    //start recognition
+    recognition.start();
+
+    recognition.start = function() {
+        console.log('Escuchando....');
+    }
+
+    recognition.onspeechend = function() {
+        console.log('Se dejo de ejecutar');
+        recognition.stop();
+    }
+
+    recognition.onresult = function(e) {
+        let transcript = e.results[0][0].transcript;
+        const ciudad = document.querySelector('#ciudad');
+        ciudad.value = transcript;
+    }
+}
 
 function buscarClima(e) {
     e.preventDefault();
@@ -14,19 +40,14 @@ function buscarClima(e) {
     const pais = document.querySelector('#pais').value;
 
     if (ciudad === '' || pais === '') {
-        //Hubo un error
         mostrarError('Ambos campos son obligatorios');
-        
         return;
     }
-
-    
-    //Consultar la API
 
     consultarAPI(ciudad, pais);
 }
 
-function mostrarError(mensaje) {
+function mostrarError( mensaje ) {
     const alerta  = document.querySelector('.bg-red-100');
     
     if (!alerta) {
@@ -41,10 +62,8 @@ function mostrarError(mensaje) {
 
         container.appendChild(alerta);
 
-        //Se elimina la alerta despues de 5 segundos
         setTimeout(() => {
-            alerta.remove();
-            
+            alerta.remove();            
         }, 5000);
     }
 
@@ -55,29 +74,25 @@ function consultarAPI(ciudad, pais) {
     const appId = '5a3821d912223d94e5372c8ea2df8789';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad},${pais}&appid=${appId}`;
 
-    Spinner();  //Muestra un spinner de carga
+    Spinner();  
 
     fetch(url)
         .then(respuesta => respuesta.json())
         .then(datos => {
 
-            console.log(datos);
+            limpiarHTML();
 
-            limpiarHTML(); //Limpiar el html previo
-
-            if (datos.cod === '404') {
+            if ( datos.cod === '404' ) {
                 mostrarError('Ciudad no encontrada');
                 return;
             }
 
-            //Imprime la respuesta en el HTML
             mostrarClima(datos);
             formulario.reset();
         })
 }
 
-function mostrarClima(datos) {
-    const { name, main: { temp, temp_max, temp_min } } = datos;
+function mostrarClima( { name, main: { temp, temp_max, temp_min } } ) {
     const centigrados  = kelvinACentigrados(temp);
     const max  = kelvinACentigrados(temp_max);
     const min  = kelvinACentigrados(temp_min);

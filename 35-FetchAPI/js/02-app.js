@@ -8,7 +8,7 @@ function obtenerDatos() {
         .then( resultado => mostrarHTML( resultado ) )
 }
 
-function mostrarHTML({ empresa, id, nombre, trabajo }) {
+function mostrarHTML( { empresa, id, nombre, trabajo } ) {
     const contenido = document.querySelector('.contenido');
     
     contenido.innerHTML = `

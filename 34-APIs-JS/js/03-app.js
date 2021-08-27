@@ -1,5 +1,4 @@
-window.addEventListener('online', actualizarEstado);
-window.addEventListener('offline', actualizarEstado);
+window.addEventListener('DOMContentLoaded', actualizarEstado);
 
 function actualizarEstado() {   
     console.log('Probando la funcion');
