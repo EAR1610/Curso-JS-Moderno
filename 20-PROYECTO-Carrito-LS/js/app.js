@@ -34,9 +34,9 @@ function CargarEventListeners() {
 function AgregarCurso(event) {
     event.preventDefault(); //Evitamos que al dar click en el boton haga scroll para arriba
 
-    if (event.target.classList.contains('agregar-carrito')) {
+    if ( event.target.classList.contains('agregar-carrito') ) {
         const cursoSeleccionado = event.target.parentElement.parentElement
-        LeerDatosCurso(cursoSeleccionado);
+        LeerDatosCurso( cursoSeleccionado );
     }
     
 }
@@ -44,11 +44,17 @@ function AgregarCurso(event) {
 
 //Elimina el curso del carrito
 function EliminarCurso(event) {
-    if (event.target.classList.contains('borrar-curso')) {
+    if ( event.target.classList.contains('borrar-curso') ) {
         const cursoId = event.target.getAttribute('data-id');
 
         //Elimina del arreglo articulosCarrito por el data-id
-        articulosCarrito = articulosCarrito.filter( curso => curso.id  !== cursoId );
+        articulosCarrito = articulosCarrito.filter( curso => {
+            if(curso.id === cursoId && curso.cantidad > 1){
+                return curso.cantidad--;
+            } else {
+                return curso.id  !== cursoId
+            }
+        });
 
         CarritoHTML();  //Iterar sobre el carrito y mostrar su HTML
     }
@@ -56,9 +62,8 @@ function EliminarCurso(event) {
 
 
 
-//Lee el contenido del HTML al que le dimos click y estrae la información del curso
-function LeerDatosCurso(curso) {
-    /* console.log(curso); */
+//Lee el contenido del HTML al que le dimos click y extrae la información del curso
+function LeerDatosCurso( curso ) {
 
     //Crear un objeto con el contenido del curso
     const infoCurso = {
@@ -71,8 +76,8 @@ function LeerDatosCurso(curso) {
 
 
     //Revisa si un elemento ya existe en el carrito
-    const existe = articulosCarrito.some( curso => curso.id === infoCurso.id);
-    if (existe) {
+    const existe = articulosCarrito.some( curso => curso.id === infoCurso.id );
+    if ( existe ) {
         //Actualizamos la cantidad
         const cursos = articulosCarrito.map( curso => {
 
@@ -92,8 +97,6 @@ function LeerDatosCurso(curso) {
         //Agrega elementos al arreglo del carrito
         articulosCarrito = [...articulosCarrito, infoCurso];
     }
-
-    console.log(articulosCarrito);
 
     CarritoHTML();
 }
@@ -124,7 +127,7 @@ function CarritoHTML() {
         `;
 
         //Agrega el HTML del carrito en el tbody
-        contenedorCarrito.appendChild(row);
+        contenedorCarrito.appendChild( row );
     });
 
     //Agregar el carrito de compras al storage
@@ -138,10 +141,8 @@ function SincronizarStorage() {
 
 //Elimina los cursos del tbody
 function LimpiarHTML() {
-    //Forma lenta
-    /* contenedorCarrito.innerHTML = ''; */
 
-    while (contenedorCarrito.firstChild) {
-        contenedorCarrito.removeChild(contenedorCarrito.firstChild);
+    while ( contenedorCarrito.firstChild ) {
+        contenedorCarrito.removeChild( contenedorCarrito.firstChild );
     }
 }

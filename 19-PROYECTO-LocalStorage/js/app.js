@@ -17,13 +17,8 @@ function EventListeners() {
         console.log(tweets);
 
         CrearHTML();
-    })
-
-    
+    })   
 }
-
-
-
 
 //Funciones
 function AgregarTweet(e) {
@@ -45,7 +40,7 @@ function AgregarTweet(e) {
     }
 
     //Añadir al arreglo de Tweets..
-    tweets = [...tweets, tweetObj];
+    tweets = [ ...tweets, tweetObj ];
 
     //Una vez agregado, vamos a crear el HTML
     CrearHTML();
@@ -56,6 +51,11 @@ function AgregarTweet(e) {
 
 //Mostar mensaje de Error
 function MostrarError(error) {
+    
+    const errorPrevio = document.querySelector('p.error');
+
+    if (errorPrevio) return;
+
     const mensajeError = document.createElement('P');
     mensajeError.textContent = error;
     mensajeError.classList.add('error');
@@ -67,7 +67,8 @@ function MostrarError(error) {
     //Elimina la alerta despues de 3 segundos
     setTimeout( () => {
         mensajeError.remove();
-    }, 3000); 
+    }, 3000);
+
 }
 
 //Muestra un listado de los tweets
@@ -100,6 +101,15 @@ function CrearHTML() {
             //insertando en el HTML
             listaTweets.appendChild(li);
         });
+    } else {
+        //Crear el HTML
+        const li = document.createElement('li');
+
+        //Añadir el texto
+        li.innerText = 'NO HAY TWEETS';
+
+        //insertando en el HTML
+        listaTweets.appendChild(li);
     }
 
     SincronizarStorage();

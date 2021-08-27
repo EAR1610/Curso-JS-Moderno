@@ -1,4 +1,4 @@
-const diaHoy = new Date();
+const diaHoy = new Date(); //Detallado
 
 let valor;
 
