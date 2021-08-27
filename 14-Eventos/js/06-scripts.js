@@ -2,7 +2,7 @@
 
 const cardDiv = document.querySelector('.card');
 const infoDiv = document.querySelector('.info');
-const titulodDiv = document.querySelector('.titulo');
+const tituloDiv = document.querySelector('.titulo');
 
 
 cardDiv.addEventListener('click', event => {
