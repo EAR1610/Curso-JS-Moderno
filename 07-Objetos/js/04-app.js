@@ -13,7 +13,7 @@ console.log(nombre);
 
 
 
-//Segunda forma EMSC6
+//Segunda forma ECM6
 
 //Destructuring
 const { nombre, precio, disponible } = producto;        //Si una llave no existe, lo coloca como 'undefined'

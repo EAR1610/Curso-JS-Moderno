@@ -39,7 +39,7 @@ carrito.pop();
 console.table(carrito);
 
 
-//Eliminar el incio del arreglo
+//Eliminar el inicio del arreglo
 carrito.shift();
 
 console.table(carrito);
